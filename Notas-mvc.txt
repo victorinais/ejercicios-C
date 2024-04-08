@@ -1,0 +1,136 @@
+FindAsync
+C#
+public async Task<IActionResult> Details(int id)
+{
+    var user = await _context.Users.FindAsync(id);
+
+    if (user == null)
+    {
+        return NotFound();
+    }
+
+    return View(user);
+}
+
+En este ejemplo, el método Details usa FindAsync para buscar un usuario por su Id. Si el usuario se encuentra, se muestra la vista "Details". Si no se encuentra, se devuelve un error 404.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+Where
+HTML
+@foreach (var item in Model.Where(x => x.Price > 100))
+{
+    <div>@item.Name</div>
+}
+
+En este ejemplo, la vista solo muestra los elementos del modelo cuyo precio es mayor a 100.
+
+C#
+public ActionResult Index()
+{
+    var users = _context.Users.Where(x => x.Country == "Colombia").ToList();
+
+    return View(users);
+}
+
+En este ejemplo, el controlador solo devuelve los usuarios que viven en Colombia.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+Select
+HTML
+@foreach (var item in Model.Select(x => x.Name))
+{
+    <div>@item</div>
+}
+
+En este ejemplo, la vista solo muestra los nombres de los elementos del modelo.
+
+C#
+public ActionResult Index()
+{
+    var users = _context.Users.Select(x => new { x.Name, x.Age }).ToList();
+
+    return View(users);
+}
+
+En este ejemplo, el controlador crea una nueva lista que contiene solo el nombre y la edad de cada usuario.
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+OrderBy
+HTML
+@foreach (var item in Model.OrderBy(x => x.Name))
+{
+    <div>@item.Name</div>
+}
+
+En este ejemplo, la vista muestra los elementos del modelo ordenados por nombre de forma ascendente.
+
+C#
+public ActionResult Index()
+{
+    var users = _context.Users.OrderBy(x => x.Age).ToList();
+
+    return View(users);
+}
+
+En este ejemplo, el controlador ordena la lista de usuarios por edad de forma ascendente.
+
+Puedes usar OrderByDescending para ordenar de forma descendente.
+Puedes usar ThenBy para ordenar por una segunda propiedad después de la primera.
+
+C#
+var users = _context.Users.OrderBy(x => x.Name).ThenBy(x => x.Age).ToList();
+
+En este ejemplo, la lista de usuarios se ordena primero por nombre y luego por edad.
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Skip
+HTML
+@foreach (var item in Model.Skip(10))
+{
+    <div>@item.Name</div>
+}
+
+En este ejemplo, la vista solo muestra los elementos del modelo a partir del undécimo.
+
+C#
+public ActionResult Index(int page = 1)
+{
+    var pageSize = 10;
+    var users = _context.Users.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+    return View(users);
+}
+
+En este ejemplo, el controlador pagina la lista de usuarios de 10 en 10. La variable page indica la página actual que se está mostrando.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Take
+HTML
+@foreach (var item in Model.Take(10))
+{
+    <div>@item.Name</div>
+}
+
+En este ejemplo, la vista solo muestra los primeros 10 elementos del modelo.
+
+C#
+public ActionResult Index(int page = 1)
+{
+    var pageSize = 10;
+    var users = _context.Users.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+    return View(users);
+}
+
+En este ejemplo, el controlador pagina la lista de usuarios de 10 en 10. La variable page indica la página actual que se está mostrando.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
