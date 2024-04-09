@@ -119,6 +119,9 @@ public ActionResult Index(int page = 1)
 
 En este ejemplo, el controlador pagina la lista de usuarios de 10 en 10. La variable page indica la página actual que se está mostrando.
 
+balsamic
+https://balsamiq.cloud/sbya7kp/plelnla/r0394
+
 
 
 
